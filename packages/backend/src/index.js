@@ -12,4 +12,6 @@ app.use(resources.context);
 app.use(resources.json());
 
 app.use('/feed', resources.api.feed);
+app.use('/search', resources.api.search);
+
 app.listen(3000, () => console.log('⚡ Listening on Port 3000.'));
