@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Heading, Flex } from '@chakra-ui/core';
+import { Heading, Flex, Box } from '@chakra-ui/core';
 
-import { SearchForm } from './components/SearchForm';
+import { SearchForm } from './components';
+import { Post } from './components';
 
 const App = ({ resources }) => {
     const [searches, setSearches] = useState([]);
@@ -26,16 +27,18 @@ const App = ({ resources }) => {
         }
     };
 
-    const Searches = searches.map((s) => <h1>{s}</h1>);
-    const Feed = feed.map((f) => <p>{f.title}</p>);
+    const Searches = searches.map((s) => <h1 key={s}>{s}</h1>);
+    const Feed = feed.map((f) => <Post key={f.guid} post={f}></Post>);
 
     return (
         <Flex m={10} flexDirection='column'>
             <SearchForm onSubmit={onFeedSearch} />
 
-            <Heading>Recent Searches</Heading>
-            {Searches.length > 0 ? Searches : 'No previous searches.'}
-            {Feed}
+            <Heading mb={3}>Recent Searches</Heading>
+            <Box mb={5}>{Searches.length > 0 ? Searches : 'No previous searches.'}</Box>
+            <Box mb={5}>
+                {Feed.length > 0 ? Feed : 'Search for a Medium username or publication to see their posts.'}
+            </Box>
         </Flex>
     );
 };
