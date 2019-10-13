@@ -4,7 +4,8 @@ import { Router } from './router';
 export const search = Router();
 
 search.get('/', (req, res) => {
-    const recentSearches = req.context.db.getRecentSearches();
+    const { search: searchContext } = req.context.db;
+    const recentSearches = searchContext.getRecentSearches();
 
     return res.send(recentSearches);
 });
