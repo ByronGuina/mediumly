@@ -2,8 +2,10 @@
 // be any implementation details exposed to consumers of the api
 // layer. The only expected contract/interface is that the export
 // endpoints exist.
-import feed from './feed';
+import { feed } from './feed';
+import { search } from './search';
 
-export default {
+export const api = {
     feed,
+    search,
 };
