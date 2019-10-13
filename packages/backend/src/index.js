@@ -8,6 +8,8 @@ const app = express();
 // implementation details.
 const resources = getResources();
 
+app.use(resources.context);
 app.use(resources.json());
+
 app.use('/feed', resources.api.feed);
 app.listen(3000, () => console.log('⚡ Listening on Port 3000.'));

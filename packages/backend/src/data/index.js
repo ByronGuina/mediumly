@@ -1,6 +1,8 @@
 // This is the entrypoint into the data/DB service
+const searches = [];
+const recentSearchLength = 5; // Requirements state to use the last 5 queries
 
-// TODO: Store the new search query
+const addSearch = (query) => searches.push(query);
+const getRecentSearches = () => searches.slice(-recentSearchLength);
 
-// TODO: Get the current search queries
-//      Note: We only store the last 5 search queries at a time
+export const db = { addSearch, getRecentSearches };
