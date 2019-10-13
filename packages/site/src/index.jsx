@@ -1,10 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { getResources } from './resources';
+import { CSSReset, ThemeProvider } from '@chakra-ui/core';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const resources = getResources();
+
+const ProvidedApp = () => (
+    <ThemeProvider>
+        <CSSReset />
+        <App resources={resources} />
+    </ThemeProvider>
+);
+
+ReactDOM.render(<ProvidedApp />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
