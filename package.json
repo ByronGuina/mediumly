@@ -1,0 +1,14 @@
+{
+    "private": true,
+    "workspaces": [
+        "packages/*"
+    ],
+    "scripts": {
+        "start:frontend": "cd packages/site && npm start",
+        "start:backend": "cd packages/backend && npm start",
+        "build:frontend": "cd packages/site && npm run build"
+    },
+    "devDependencies": {
+        "lerna": "^3.16.4"
+    }
+}
