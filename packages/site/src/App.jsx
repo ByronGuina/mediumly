@@ -19,17 +19,10 @@ const App = ({ resources }) => {
     }, [resources]);
 
     const onFeedSearch = async (searchText) => {
-        // TODO: Combine the two setters into a single dispatch
         try {
             const feed = await resources.api.getFeed(searchText);
 
             dispatch({ type: actions.updateAll, payload: { searches: searchText, feed: feed } });
-
-            // We _can_ ensure we don't include duplicates in the
-            // list of recent searches, but should we?
-            // if (!searches.includes(searchText)) {
-            //     setSearches([...searches, searchText]);
-            // }
         } catch (e) {
             console.error(e);
             toast({
