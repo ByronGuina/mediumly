@@ -53,7 +53,7 @@ const App = ({ resources }) => {
                 Recent Searches
             </Heading>
             <Box mb={10}>
-                <SearchList searches={state.searches} />
+                <SearchList onItemClick={onFeedSearch} searches={state.searches} />
             </Box>
 
             <Heading mb={3}>{state.feed.length > 0 ? 'Feed' : ''}</Heading>
