@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { Heading, Box, useToast } from '@chakra-ui/core';
 
 import { SearchForm, PostList, SearchList, Layout } from './components';
