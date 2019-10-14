@@ -1,6 +1,6 @@
 import { json } from 'express';
 import cors from 'cors';
-import { context } from './middleware';
+import { context, feedNameDoesNotExistErrorHandler } from './middleware';
 import { api } from '../api';
 
 export const getResources = () => {
@@ -9,5 +9,8 @@ export const getResources = () => {
         cors,
         api,
         context,
+        errorHandling: {
+            invalidFeed: feedNameDoesNotExistErrorHandler,
+        },
     };
 };

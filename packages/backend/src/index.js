@@ -15,4 +15,6 @@ app.use(resources.cors());
 app.use('/feed', resources.api.feed);
 app.use('/search', resources.api.search);
 
+app.use(resources.errorHandling.invalidFeed);
+
 app.listen(4500, () => console.log('⚡ Listening on Port 4500.'));

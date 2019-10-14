@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Heading, Flex, Box } from '@chakra-ui/core';
+import { Heading, Flex, Box, useToast } from '@chakra-ui/core';
 
 import { SearchForm } from './components';
 import { PostList } from './components';
@@ -7,6 +7,7 @@ import { PostList } from './components';
 const App = ({ resources }) => {
     const [searches, setSearches] = useState([]);
     const [feed, setFeed] = useState([]);
+    const toast = useToast();
 
     useEffect(() => {
         const getInitialSearches = async () => {
@@ -19,11 +20,24 @@ const App = ({ resources }) => {
 
     const onFeedSearch = async (searchText) => {
         // TODO: Combine the two setters into a single dispatch
-        const feed = await resources.api.getFeed(searchText);
-        setFeed(feed);
+        try {
+            const feed = await resources.api.getFeed(searchText);
 
-        if (!searches.includes(searchText)) {
-            setSearches([...searches, searchText]);
+            setFeed(feed);
+
+            if (!searches.includes(searchText)) {
+                setSearches([...searches, searchText]);
+            }
+        } catch (e) {
+            console.error(e);
+            toast({
+                title: 'The entered username or publication does not exist.',
+                description: 'Please enter a valid Medium username (@Medium) or publication (the-atlantic).',
+                status: 'error',
+                duration: 5000,
+                position: 'top-right',
+                isClosable: true,
+            });
         }
     };
 

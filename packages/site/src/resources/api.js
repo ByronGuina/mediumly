@@ -1,5 +1,9 @@
 const makeRequest = async (url) => {
     const response = await fetch(url);
+    if (response.status >= 400 && response.status < 600) {
+        throw new Error('Bad response from server');
+    }
+
     return await response.json();
 };
 
