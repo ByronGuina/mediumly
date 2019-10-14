@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Heading, Flex, Box, useToast } from '@chakra-ui/core';
+import { Heading, Box, useToast } from '@chakra-ui/core';
 
-import { SearchForm } from './components';
-import { PostList } from './components';
+import { SearchForm, PostList, SearchList, Layout } from './components';
 
 const App = ({ resources }) => {
     const [searches, setSearches] = useState([]);
@@ -24,10 +23,13 @@ const App = ({ resources }) => {
             const feed = await resources.api.getFeed(searchText);
 
             setFeed(feed);
+            setSearches([...searches, searchText]);
 
-            if (!searches.includes(searchText)) {
-                setSearches([...searches, searchText]);
-            }
+            // We _can_ ensure we don't include duplicates in the
+            // list of recent searches, but should we?
+            // if (!searches.includes(searchText)) {
+            //     setSearches([...searches, searchText]);
+            // }
         } catch (e) {
             console.error(e);
             toast({
@@ -38,27 +40,24 @@ const App = ({ resources }) => {
                 position: 'top-right',
                 isClosable: true,
             });
+            setFeed([]);
         }
     };
 
-    const Searches = searches.map((s) => <h1 key={s}>{s}</h1>);
-
     return (
-        <Flex m={10} flexDirection='column'>
+        <Layout m={10} flexDirection='column'>
             <SearchForm onSubmit={onFeedSearch} />
 
             <Heading mb={3}>Recent Searches</Heading>
-            <Box mb={10}>{Searches.length > 0 ? Searches : 'No previous searches.'}</Box>
+            <Box mb={10}>
+                <SearchList searches={searches} />
+            </Box>
 
             <Heading mb={3}>{feed.length > 0 ? 'Feed' : ''}</Heading>
             <Box mb={5}>
-                {feed.length > 0 ? (
-                    <PostList posts={feed} />
-                ) : (
-                    <Heading size='m'>Search for a Medium username or publication to see their posts.</Heading>
-                )}
+                <PostList posts={feed} />
             </Box>
-        </Flex>
+        </Layout>
     );
 };
 

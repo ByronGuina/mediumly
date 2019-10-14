@@ -19,7 +19,6 @@ export const SearchForm = ({ onSubmit }) => {
                     value={searchText}
                     onChange={(e) => setSearchText(e.target.value)}
                     mr={5}
-                    width='50%'
                 />
                 <Button variantColor='green' onClick={onSearch}>
                     Search Feeds!
