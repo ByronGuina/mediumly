@@ -36,5 +36,4 @@ There were a couple implementation issues I encountered while working on the tak
 
 ## What I would improve next
 - Remove the dependency on the third-party JSON converter API. Right now our RSS service isn't that resilient since we're dependent on the other API service. I would get one of the existing libraries working correctly (xml2js, xml2json, camaro, etc.) so we can handle the XML conversion on our own.
-- Improve UX. Right now we can't click on a recent search to populate the feed. It would be a nice experience to be able to easily switch between the current and previous searches.
 - Write styling for the description and content fields of the Medium post. Currently we don't style the description or content fields. This results in pretty bad reading experience when trying to look at posts with a lot of content in those fields. Alternatively, we can only show _part_ of the description or content fields so they don't take up as much space.
