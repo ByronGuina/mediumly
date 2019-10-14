@@ -9,14 +9,14 @@ const item = {
 
 export const Post = ({ post }) => (
     <motion.div variants={item}>
-        <Flex flexDirection='column' mb={10} mt={5} width='50%'>
+        <Flex flexDirection='column' mb={10} mt={5}>
             <Link href={post.link} isExternal>
                 <Heading as='h2' size='md'>
                     {post.title}
                 </Heading>
                 <Text>{new Date(post.pubDate).toLocaleDateString()}</Text>
-                <Text>{post.author}</Text>
-                {/* <article dangerouslySetInnerHTML={{ __html: post.description }}></article> */}
+                <Text mb={5}>{post.author}</Text>
+                <Text dangerouslySetInnerHTML={{ __html: post.description }}></Text>
             </Link>
         </Flex>
     </motion.div>

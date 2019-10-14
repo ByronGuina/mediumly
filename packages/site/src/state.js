@@ -1,3 +1,5 @@
+import { takeLastFive } from './functional';
+
 export const initialState = {
     searches: [],
     feed: [],
@@ -8,7 +10,7 @@ export const reducer = (state, action) => {
         case 'update searches':
             return {
                 ...state,
-                searches: takeLastFive([...state.searches, ...action.payload]),
+                searches: takeLastFive([...action.payload]),
             };
         case 'update feed':
             return {
@@ -17,6 +19,7 @@ export const reducer = (state, action) => {
             };
         case 'update searches and feed':
             return {
+                ...state,
                 feed: action.payload.feed,
                 searches: takeLastFive([...state.searches, action.payload.searches]),
             };
@@ -29,8 +32,4 @@ export const actions = {
     updateSearches: 'update searches',
     updateFeed: 'update feed',
     updateAll: 'update searches and feed',
-};
-
-const takeLastFive = (arr) => {
-    return arr.slice(-5);
 };

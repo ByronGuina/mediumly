@@ -49,7 +49,9 @@ const App = ({ resources }) => {
         <Layout m={10} flexDirection='column'>
             <SearchForm onSubmit={onFeedSearch} />
 
-            <Heading mb={3}>Recent Searches</Heading>
+            <Heading size='sm' mb={3}>
+                Recent Searches
+            </Heading>
             <Box mb={10}>
                 <SearchList searches={state.searches} />
             </Box>
