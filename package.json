@@ -9,8 +9,5 @@
         "start:frontend": "cd packages/site && yarn start",
         "start:backend": "cd packages/backend && yarn start",
         "build:frontend": "cd packages/site && yarn run build"
-    },
-    "devDependencies": {
-        "lerna": "^3.16.4"
     }
 }
