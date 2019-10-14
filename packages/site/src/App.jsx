@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useReducer } from 'react';
 import { Heading, Box, useToast } from '@chakra-ui/core';
 
 import { SearchForm, PostList, SearchList, Layout } from './components';
+import { reducer, initialState, actions } from './state';
 
 const App = ({ resources }) => {
-    const [searches, setSearches] = useState([]);
-    const [feed, setFeed] = useState([]);
+    const [state, dispatch] = useReducer(reducer, initialState);
     const toast = useToast();
 
     useEffect(() => {
         const getInitialSearches = async () => {
             const searches = await resources.initialize();
-            setSearches(searches);
+
+            dispatch({ type: actions.updateSearches, payload: searches });
         };
 
         getInitialSearches();
@@ -22,8 +23,7 @@ const App = ({ resources }) => {
         try {
             const feed = await resources.api.getFeed(searchText);
 
-            setFeed(feed);
-            setSearches([...searches, searchText]);
+            dispatch({ type: actions.updateAll, payload: { searches: searchText, feed: feed } });
 
             // We _can_ ensure we don't include duplicates in the
             // list of recent searches, but should we?
@@ -40,7 +40,8 @@ const App = ({ resources }) => {
                 position: 'top-right',
                 isClosable: true,
             });
-            setFeed([]);
+
+            dispatch({ type: actions.updateFeed, payload: [] });
         }
     };
 
@@ -50,12 +51,12 @@ const App = ({ resources }) => {
 
             <Heading mb={3}>Recent Searches</Heading>
             <Box mb={10}>
-                <SearchList searches={searches} />
+                <SearchList searches={state.searches} />
             </Box>
 
-            <Heading mb={3}>{feed.length > 0 ? 'Feed' : ''}</Heading>
+            <Heading mb={3}>{state.feed.length > 0 ? 'Feed' : ''}</Heading>
             <Box mb={5}>
-                <PostList posts={feed} />
+                <PostList posts={state.feed} />
             </Box>
         </Layout>
     );
