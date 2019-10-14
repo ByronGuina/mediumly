@@ -4,9 +4,11 @@
         "packages/*"
     ],
     "scripts": {
-        "start:frontend": "cd packages/site && npm start",
-        "start:backend": "cd packages/backend && npm start",
-        "build:frontend": "cd packages/site && npm run build"
+        "install:frontend": "cd packages/site && yarn",
+        "install:backend": "cd packages/site && yarn",
+        "start:frontend": "cd packages/site && yarn start",
+        "start:backend": "cd packages/backend && yarn start",
+        "build:frontend": "cd packages/site && yarn run build"
     },
     "devDependencies": {
         "lerna": "^3.16.4"
