@@ -20,8 +20,8 @@ const App = ({ resources }) => {
 
     const onFeedSearch = async (searchText) => {
         try {
+            dispatch({ type: actions.setSearching, payload: true });
             const feed = await resources.api.getFeed(searchText);
-
             dispatch({ type: actions.updateAll, payload: { searches: searchText, feed: feed } });
         } catch (e) {
             console.error(e);
@@ -40,7 +40,7 @@ const App = ({ resources }) => {
 
     return (
         <Layout m={10} flexDirection='column'>
-            <SearchForm onSubmit={onFeedSearch} />
+            <SearchForm onSubmit={onFeedSearch} isLoading={state.isSearching} />
 
             <Heading size='sm' mb={3}>
                 Recent Searches

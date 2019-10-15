@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Input, Button, Flex } from '@chakra-ui/core';
 
-export const SearchForm = ({ onSubmit }) => {
+export const SearchForm = ({ onSubmit, isLoading }) => {
     const [searchText, setSearchText] = useState('');
 
     const onSearch = (e) => {
@@ -19,10 +19,10 @@ export const SearchForm = ({ onSubmit }) => {
                     value={searchText}
                     onChange={(e) => setSearchText(e.target.value)}
                     mr={5}
-                    width='75%'
+                    width='65%'
                 />
-                <Button variantColor='green' onClick={onSearch}>
-                    Search Feeds!
+                <Button leftIcon='search' variantColor='green' onClick={onSearch} isLoading={isLoading}>
+                    Search Feeds
                 </Button>
             </Flex>
         </form>
