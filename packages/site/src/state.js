@@ -16,6 +16,7 @@ export const reducer = (state, action) => {
         case actions.updateFeed:
             return {
                 ...state,
+                isSearching: false,
                 feed: action.payload,
             };
         case actions.updateAll:
